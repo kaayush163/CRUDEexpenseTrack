@@ -1,0 +1,116 @@
+const tranFormEl=document.getElementById("transactionForm");
+const btn=document.getElementById("earnBtn");
+
+const LStransactions = JSON.parse(localStorage.getItem("transactions")); 
+let transactions = localStorage.getItem("transactions")!=null ? LStransactions:[];
+
+window.addEventListener('DOMContentLoaded', () => {
+
+     axios.get("https://crudcrud.com/api/6387f9b6539546a3b0e15c1bf9db212a/appointment")
+       .then((res)  => {
+        console.log(res.data.content);
+       })
+       .catch(err => {
+        console.log(err)
+       })
+//   const localStorageObj=localStorage;
+//   const localstoragekeys = Object.keys(localStorageObj)
+
+//   for(var i=0;i<localstoragekeys.length;i++)
+//   {
+//     const key = localstoragekeys[i]
+//     const userDetailsString = localStorageObj[key];
+//     const userDetailsObj = JSON.parse(userDetailsString);
+//     showUser(userDetailsObj)
+//   }
+})
+
+  //let transactions = localStorage.getItem("transactions")!=null ? LStransactions:[];
+
+
+// let transactions=dummyTran; //using of let means baad emin change krne ki jarroort ho skti ahi
+  //empty array generatec
+
+function addTransaction(e){
+    e.preventDefault();
+    const txt=document.getElementById("text").value;
+    const amt=document.getElementById("amount").value;
+
+    let details={
+      //id:generateId(),
+      text:txt, 
+      amount:+amt
+    };
+    transactions.push(details);
+    showUser(details);
+    updateLS(details);
+    //let stor=JSON.parse(localStorage.getItem("detail_amount"));
+    //if(stor){stor.forEach((st) => addTransaction(st))};
+    text.value="";
+    amount.value="";
+   
+}
+
+////function generateId()
+//{
+ //    return Math.floor(Math.random()*10000000000);
+//}
+
+
+//The problem is only here you ahve to specify both ed and del button independently and differently
+function showUser(details)
+{
+    const parentEl=document.getElementById('addTran');
+    const childEl=document.createElement('p');
+    childEl.textContent=details.text+'-'+details.amount;
+
+    const delbtn=document.createElement('button');
+    delbtn.style.backgroundColor='crimson';
+    delbtn.appendChild(document.createTextNode('DEL'));
+       
+    const edbtn=document.createElement('button');
+    edbtn.style.backgroundColor='chartreuse';
+    edbtn.style.color='black';
+    edbtn.appendChild(document.createTextNode('EDIT'));
+
+    edbtn.onclick = () => {
+        //const conv=JSON.parse(localStorage.getItem(student.email));
+        //console.log(conv.email);
+        localStorage.removeItem(details.amount);
+        parentEl.removeChild(childEl);
+        document.getElementById('text').value=details.text;
+        document.getElementById('amount').value=details.amount;
+
+        
+      }
+    delbtn.onclick = () => {
+       //if(confirm("are You sure?"))
+       //{
+       transactions = transactions.filter(transaction => transaction.id!==id);
+         //localStorage.removeItem(details.amount);
+          //parentEl.removeChild(childEl);   
+          
+       //}
+       
+      }
+
+    
+    childEl.appendChild(delbtn);
+    childEl.appendChild(edbtn);
+    parentEl.appendChild(childEl);
+    updateLS(details);
+
+}
+
+function updateLS(details){  //Ab ye jo local storage isko aur bhi jagah par updated rakhna padega like in remove wwale mei bhi
+  
+  axios.post("https://crudcrud.com/api/6387f9b6539546a3b0e15c1bf9db212a/appointment",details)
+       .then((response) => {
+        console.log(response)
+       })
+       .catch((err) => {
+        console.log(err)
+       })
+  //localStorage.setItem("transactions",JSON.stringify(transactions));
+}
+tranFormEl.addEventListener('submit',addTransaction);
