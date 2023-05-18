@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="./index.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+     <div class="container"> <!--Jaha par expense tracker ke aaspaas background dikhega wo container hai-->
+      <div class="box"><!--Now we can make boxes inside the container first box is for top level-->
+
+        <section class="box_top"> <!--this is our first level box at the top for the purpose of heading and balance noted down-->
+            <h1>Expense machine</h1>
+
+            <div class="bal">
+                
+                <h2>Rs.0</h2>
+                <h3>Your Balance</h3>
+            </div>
+        </section>
+
+         <div class="transaction_cont"><!--Ye hai jo bhi transaction add hoga wo iss class box mei show hoga aur keh skte hai ki ye middle wala hai box ka part hai-->
+            <h3>Transactions</h3>
+            <hr/>
+
+            <div id="addTran" class="transactions">
+                <div class="individual_tran">
+                    <div class="left">
+                        <p>Example Text</p>
+                        <p>+ Rs200</p>
+                    </div>
+                    <div class="status credit">C</div>
+                </div>
+                <div class="individual_tran">
+                    <div class="left">
+                        <p>Example Text</p>
+                        <p>+ Rs200</p>
+                    </div>
+                    <div class="status debit">D</div>
+                </div>
+            </div>
+
+            
+         </div>
+
+         <section class="trans_form">
+            <h3>Add Transactions</h3>
+
+            <form id="transactionForm"> <!--We have written id so that we can acces this from-->
+                <div class="inputs">
+                    <div class="form_control">
+                        <label for=""text>Text</label>
+                        <input 
+                          placeholder="Enter Description" 
+                          type="text" name="text" 
+                          id="text"
+                        />
+                    </div>
+                    <div class="form_control">
+                        <label for="amount">Amount</label>
+                        <input 
+                          placeholder="Amount" 
+                          type="number" name="amount" 
+                          id="amount"
+                        /> <!--The type number will do scrolling function -->
+                    </div>
+                </div>
+
+                <div class="button_container">
+                    <button id="earnBtn">
+                        <p>
+                            Rs.0
+                        </p>
+                        <p>
+                            Earning
+                        </p>
+                    </button>
+                    <button id="expBtn">
+                        <p>
+                            Rs.0
+                        </p>
+                        <p>
+                            Expense
+                        </p>
+                    </button>
+                </div>
+               
+            </form>
+         </div><!--ye hai bottom wala box jo ki trsansaction_cont se bahar hoga aur box class ke ander hi rahega-->
+      </div>
+     </div>
+     
+</body>
+</html>
